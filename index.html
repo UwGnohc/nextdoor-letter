@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbfaf5"><title>隔壁来信 · BOYNEXTDOOR</title>
+<style>
+:root{--paper:#fcfbf6;--card:#fffefa;--ink:#183e45;--quiet:#5b7172;--rule:#d8e3dd;--teal:#087b88;--deep:#074e60;--sky:#b8e9e9;--door:#31bfc9;--blue:#087b91;--lemon:#f7df63;--mint:#c7e6c7;--sans:"DM Sans","Microsoft YaHei UI","PingFang SC",Arial,sans-serif;--head:"Barlow Condensed","Arial Narrow","Microsoft YaHei UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:12px}body{margin:0;background:var(--paper);font:14px/1.55 var(--sans);color:var(--ink)}button,input{font:inherit}a{color:inherit;text-decoration:none}button{border:0;background:none;color:inherit;cursor:pointer}button,a,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}button:disabled{cursor:wait}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #167e9b;outline-offset:4px}[hidden]{display:none!important}.wrap{margin:auto;max-width:1192px;padding:0 42px}.symbols{height:0;width:0;position:absolute;overflow:hidden}.icon{height:17px;width:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.row,.brand,.nav,.action,.word,.fresh,.card-meta,.section-title,.feed-head,.mail-actions,.plate-wrap,.plaque,.source-row,.event-top,.status-note{display:flex;align-items:center}.row{justify-content:space-between;gap:14px}.top{height:76px}.brand{gap:11px;font-weight:850;font-size:18px;letter-spacing:-.06em}.home-logo{position:relative;width:28px;height:33px;background:var(--door);clip-path:polygon(0 28%,50% 0,100% 28%,100% 100%,0 100%);transform:rotate(-4deg)}.home-logo:before{content:"";position:absolute;inset:12px 8px 0;background:var(--paper);border-radius:3px 3px 0 0}.home-logo:after{content:"";position:absolute;top:20px;left:17px;width:4px;height:4px;border-radius:50%;background:var(--teal)}.brand small{display:block;color:var(--quiet);font-size:9px;line-height:1.2;letter-spacing:.12em;font-weight:750}.nav{gap:24px;font-size:12px;font-weight:650}.nav a:hover,.plain:hover{text-decoration:underline;text-underline-offset:3px}.action{display:inline-flex;justify-content:center;gap:7px;border:1px solid #c9dad6;background:var(--card);border-radius:24px;padding:8px 14px;font-weight:650;font-size:12px}.action:hover{background:#ebf3ef}.action:disabled{background:#edf2ee;color:#597472}
+.hero{position:relative;isolation:isolate;background:var(--sky);border-radius:22px;overflow:hidden;min-height:272px;display:flex;align-items:center}.hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#318d9626 .7px,transparent .95px);background-size:6px 6px;mask-image:linear-gradient(96deg,transparent 0%,#000 78%);z-index:-1}.hero-copy{position:relative;z-index:2;padding:28px 0 30px 41px;width:52%;pointer-events:none}.hero-copy button{pointer-events:auto}.word{gap:8px;color:#225c65;font:800 12px/1.4 var(--head);letter-spacing:.115em}.word .icon{width:21px;height:18px}.hero h1{font-size:clamp(48px,5.8vw,80px);font-weight:950;line-height:1.13;letter-spacing:-.095em;margin:7px 0 6px;color:#143e48;text-shadow:0 2px 0 #fff5}.hero-copy p{margin:8px 0 18px;color:#365e63;font-size:14px}.mail-actions{gap:14px;flex-wrap:wrap}.primary{background:var(--deep);color:#fff;border-color:var(--deep);box-shadow:0 2px 0 #fff6}.primary:hover,.primary[aria-pressed=true]{background:#103b46}.primary .num{background:#e6f4e9;color:#144e56;border-radius:10px;padding:0 6px;min-width:18px;font-size:11px}.hero-copy time{font-size:11px;color:#47676b}
+/* 门框保留在墙上，只有门扇围绕左侧铰链转动。 */
+.porch{position:absolute;right:4%;bottom:0;width:390px;height:260px;z-index:1;user-select:none}.base{position:absolute;bottom:12px;left:34px;width:316px;height:19px;background:#64abad48;border-radius:50%;transform:rotate(-2deg)}.wall-line{position:absolute;height:3px;background:#86cdd0;border-radius:3px;width:26px;top:66px;right:44px;box-shadow:18px 10px 0 #86cdd0,8px 19px 0 #9bdadd}.wall-line.two{top:181px;left:42px;width:18px}.door-lamp{position:absolute;left:80px;top:53px;width:18px;height:23px;background:#fff1ab;border:3px solid #527e85;border-radius:6px 6px 9px 9px;transform:rotate(-6deg)}.door-lamp:before{content:"";position:absolute;left:-5px;right:-5px;top:-5px;height:6px;background:#46727d;border-radius:7px 7px 2px 2px}.door-lamp:after{content:"";position:absolute;bottom:-7px;left:4px;width:5px;height:6px;background:#567c80}
+.door-button{position:absolute;bottom:29px;left:116px;display:block;width:132px;height:205px;border-radius:11px 11px 2px 2px;border:6px solid #f8ffed;background:#f2d785;box-shadow:0 0 0 2px #478c96,6px 4px 0 #5198a24a;perspective:470px;padding:0;text-align:left;overflow:visible;transform:rotate(-1deg)}.door-button:focus-visible{outline-offset:7px}.room{position:absolute;inset:0;overflow:hidden;background:repeating-linear-gradient(90deg,#f4dfa1 0 15px,#ebd296 16px 17px);border-radius:4px 4px 0 0;box-shadow:inset 4px 2px 15px #5b553f73}.room:after{content:"";position:absolute;bottom:0;left:0;width:100%;height:22%;background:repeating-linear-gradient(35deg,#96bb9f 0 14px,#b4cbb1 15px 28px)}
+.envelope{position:absolute;left:25%;top:36%;width:56px;height:39px;border:2px solid #a88955;transform:rotate(-13deg);border-radius:4px;background:linear-gradient(143deg,transparent 49%,#d5b97d 50%,transparent 53%) 0 0/52% 100% no-repeat,linear-gradient(217deg,transparent 49%,#d5b97d 50%,transparent 53%) 100% 0/52% 100% no-repeat,#fffbea;box-shadow:1px 5px 0 #aa8e563c}.envelope:after{content:"♥";position:absolute;top:8px;left:20px;color:#1f9dab;font-size:14px}
+.door-leaf{position:absolute;inset:0;border:2px solid #178194;border-radius:5px 5px 0 0;transform-origin:left center;transform:rotateY(0deg);transform-style:preserve-3d;transition:transform .7s cubic-bezier(.25,.78,.24,1);background:linear-gradient(100deg,#5bcfd0,var(--door) 70%,#25aebb);box-shadow:inset 3px 3px 0 #b0eff0,inset -3px -3px 0 #198fa4}.door-button.open .door-leaf{transform:rotateY(-66deg)}.door-button:hover .door-leaf{filter:brightness(1.03)}.door-glass{position:absolute;left:15%;right:15%;top:9%;height:32%;border:4px solid #2392a0;background:linear-gradient(124deg,transparent 31%,#fff8 32% 39%,transparent 40% 52%,#fff8 53% 57%,transparent 58%),linear-gradient(#b9dfdf,#e4f1df);border-radius:6px 6px 2px 2px;box-shadow:0 2px 0 #7cdbda,inset 0 1px 4px #35909d6b}.door-glass:after{content:"";position:absolute;left:49%;height:100%;width:3px;background:#459ba6}.door-number{position:absolute;top:47%;width:100%;text-align:center;font:850 11px/1 var(--head);letter-spacing:.12em;color:#17677a}.mail-slot{position:absolute;left:26%;width:47%;height:8px;top:58%;border-radius:3px;border:2px solid #6c875f;background:#efdc7c;box-shadow:0 1px 0 #fff9}.knob{position:absolute;right:8%;top:59%;width:10px;height:17px;border:2px solid #5d817b;background:#f6da65;border-radius:7px;box-shadow:1px 1px 0 #146e81}.knob:after{position:absolute;content:"";top:2px;left:-6px;width:11px;height:4px;background:#f9e883;border-radius:4px;border:1px solid #8a8757}.panel{position:absolute;left:17%;right:17%;bottom:9%;height:19%;border:2px solid #209aae;box-shadow:1px 1px 0 #8ae0db,inset 1px 1px 0 #7ed9da}.hinge{position:absolute;left:-4px;top:17%;width:5px;height:14px;background:#689693;border-radius:2px;border:1px solid #427f83}.hinge.lower{top:78%}.step{position:absolute;bottom:18px;left:107px;width:152px;height:12px;background:#e4ece0;border:1px solid #84acac;border-bottom:4px solid #a5c4c0;border-radius:4px;transform:skewX(-10deg)}.door-hint{position:absolute;bottom:6px;left:145px;font-size:10px;color:#396269;letter-spacing:.04em}
+/* 透明罩、内置小屋和握柄形成应援棒的轮廓。 */
+.stick{position:absolute;right:53px;bottom:31px;width:60px;height:116px;transform:rotate(14deg);transform-origin:50% 95%;z-index:3;pointer-events:none}.globe{position:absolute;top:0;left:2px;width:57px;height:56px;overflow:hidden;border-radius:49% 49% 46% 46%;border:2px solid #6b939d;background:linear-gradient(120deg,#faffffae,#fff4 46%,#9ed0d2aa);box-shadow:inset -3px -3px 0 #6d9fa261}.globe:after{content:"";position:absolute;top:6px;left:8px;width:14px;height:7px;border-radius:50%;border-top:3px solid #fff;transform:rotate(-36deg)}.house{position:absolute;left:14px;bottom:6px;width:24px;height:23px;background:#fbefda;border:1px solid #87928b;transform:skewY(-5deg)}.house:before{content:"";position:absolute;left:-5px;top:-10px;width:31px;height:13px;background:#589b9d;clip-path:polygon(50% 0,100% 82%,91% 100%,49% 29%,8% 100%,0 82%)}.house:after{content:"";position:absolute;left:7px;bottom:0;width:9px;height:16px;background:#5db9c2;border:1px solid #467e89}.neck{position:absolute;left:13px;top:48px;width:36px;height:15px;border-radius:0 0 48% 48%;background:#faf8eb;border:1.5px solid #8a9b98}.handle{position:absolute;top:58px;left:19px;width:22px;height:59px;background:linear-gradient(90deg,#d3dddb,#fffef2 42%,#eeefdf);border:1.5px solid #8b9b95;border-radius:5px 5px 10px 10px}.handle:after{content:"";position:absolute;top:7px;left:6px;width:7px;height:8px;border:1px solid #87a4a5;border-radius:3px}
+.star{position:absolute;font-family:Georgia,serif;color:#fff9d0;line-height:1;text-shadow:0 1px 0 #6ca5a3;pointer-events:none}.star.a{font-size:27px;top:47px;right:83px}.star.b{font-size:16px;top:156px;left:75px}.star.c{font-size:12px;top:124px;right:42px}.waiting .door-lamp{animation:lamp 4.4s ease-in-out infinite}.busy .star.a{animation:twinkle 1s ease-in-out infinite alternate}.busy .refresh-icon{animation:turn 1.1s linear infinite}.door-button.open .envelope{animation:letter .8s ease both}.new-in{animation:arrive .38s ease both}
+@keyframes lamp{0%,27%,100%{box-shadow:0 0 0 0 #ffed9d00}13%{box-shadow:0 0 0 5px #fceca642,0 0 13px 4px #fff2ae90}}@keyframes twinkle{to{transform:scale(.72) rotate(20deg)}}@keyframes turn{to{transform:rotate(360deg)}}@keyframes letter{0%,22%{transform:translateY(7px) rotate(-5deg)}to{transform:translateY(0) rotate(-13deg)}}@keyframes arrive{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.members{padding:20px 0 23px;border-bottom:1px solid var(--rule);margin-bottom:27px}.plate-wrap{gap:7px;flex-wrap:wrap}.plates-label{font-size:12px;font-weight:700;margin-right:6px}.plaque{font-family:var(--head);border:1px solid #ceddd7;border-radius:6px;background:#fffdf7;padding:6px 11px;gap:7px;line-height:1.35;font-size:11px;font-weight:750;letter-spacing:.03em;box-shadow:0 2px 0 #e9ece1}.plaque:before{content:"";width:3px;height:3px;border-radius:50%;background:#a0ada5}.plaque[aria-pressed=true]{background:#235860;color:#fff;border-color:#235860}.plaque[aria-pressed=true]:before{background:#f6e57a}.plaque:hover{border-color:#77abb0}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:36px;align-items:start}.feed-head{justify-content:space-between;gap:10px;margin-bottom:14px}.section-title{gap:9px}.section-title .icon{color:var(--teal)}h2,h3,p{margin:0}h2{font-size:25px;letter-spacing:-.055em;line-height:1.3}.feed-count,.quiet{color:var(--quiet);font-size:12px}.feed-count{font-size:11px}.list{display:grid;gap:9px}.news-card{background:var(--card);border:1px solid var(--rule);border-radius:13px;display:grid;grid-template-columns:44px minmax(0,1fr);gap:15px;padding:16px 18px;align-items:start}.stamp{display:grid;place-items:center;align-content:center;align-self:start;border:1px dashed #accbc8;color:#30636b;background:#eef5ef;border-radius:5px;min-height:47px;font-size:10px;line-height:1.1;margin-top:3px}.stamp b{font-family:var(--head);font-weight:850;font-size:23px;letter-spacing:-.06em;line-height:1.15}.card-meta{gap:7px;flex-wrap:wrap;color:var(--quiet);font-size:11px}.kind{color:#236974;font-weight:700}.fresh{font-size:10px;color:#7b590d;background:#fcf0b7;border-radius:4px;padding:0 5px;font-weight:650}.news-card h3{font-size:17px;line-height:1.45;margin:5px 0;font-weight:740;overflow-wrap:anywhere}.news-card h3 a:hover,.event-title:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;color:var(--teal)}.summary{font-size:12px;color:var(--quiet);overflow-wrap:anywhere}.card-bottom{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-top:8px}.member-tag{font-size:10px;font-weight:650;color:#38676c;letter-spacing:.03em}.member-tag+.member-tag:before{content:"/";margin-right:5px;color:#879e9b}.external{display:inline-flex;align-items:center;gap:4px;color:var(--teal);font-size:11px;font-weight:650;margin-left:auto}.external .icon{width:12px;height:12px}.plain{color:var(--teal);font-size:12px;font-weight:650}.more{display:block;border:1px solid var(--rule);border-radius:9px;margin:10px auto 0;padding:7px 18px;color:var(--teal);font-size:12px}.more:hover{background:#edf5ef}
+.aside{display:grid;gap:14px}.event-card{background:#f4f3d9;border:1px solid #dddfbd;border-radius:14px;padding:17px 18px;position:relative}.event-top{justify-content:space-between;gap:9px}.aside h2{font-size:16px;letter-spacing:-.035em}.event-card .icon{color:#667541}.event-card .quiet{color:#5f6849}.event-body{margin-top:12px}.event-date{display:block;font-size:12px;color:#526043;font-weight:700;margin-bottom:6px}.event-title{display:block;font-size:15px;line-height:1.5;font-weight:700}.event-src{font-size:11px;margin-top:7px;color:#616b4f}.upcoming-badge{font-size:10px;color:#586743;background:#e1eac6;padding:1px 7px;border-radius:9px}.sources{border:1px solid var(--rule);border-radius:13px;background:var(--card);padding:15px 17px}.sources summary{display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none;font-size:14px;font-weight:700}.sources summary::-webkit-details-marker{display:none}.sources summary .icon{width:13px;height:13px;color:var(--teal);transition:transform .22s}.sources[open] summary .icon{transform:rotate(90deg)}.source-row{justify-content:space-between;gap:8px;align-items:flex-start;border-top:1px solid var(--rule);padding-top:9px;margin-top:9px;font-size:12px}.source-row a:hover{text-decoration:underline}.source-state{text-align:right;color:var(--quiet);font-size:10px}.bad{color:#9b4738}.status-note{font-size:12px;color:#80522f;margin:0 0 10px}.status-note:empty{display:none}.empty{border:1px dashed #c7d8cf;border-radius:12px;padding:24px 17px;color:var(--quiet);background:#f7f8ef;font-size:13px}.foot{margin:40px auto 0;border-top:1px solid var(--rule);padding-top:16px;padding-bottom:24px;color:var(--quiet);font-size:11px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+@media(max-width:900px){.wrap{padding:0 27px}.porch{right:0}.hero-copy{padding-left:30px}.layout{gap:20px;grid-template-columns:minmax(0,1fr) 240px}.plate-wrap{gap:5px}.plaque{padding:5px 8px}.plates-label{margin-right:2px}}
+@media(max-width:705px){.wrap{padding:0 17px}.top{height:61px}.brand{font-size:16px}.nav{gap:12px}.nav a{display:none}.hero{min-height:220px;border-radius:17px}.porch{transform:scale(.76);transform-origin:100% 100%;right:-8px}.hero-copy{padding:24px 0 25px 23px;width:56%}.hero-copy h1{font-size:clamp(41px,8vw,56px)}.hero-copy p{font-size:12px}.hero-copy time{display:block}.mail-actions{gap:8px}.layout{grid-template-columns:1fr}.members{margin-bottom:20px;padding:13px 0 16px}.aside{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}.foot{margin-top:23px}.news-card{padding:13px;gap:10px}.feed-head{margin-bottom:10px}h2{font-size:22px}}
+@media(max-width:470px){.porch{transform:scale(.59);right:-29px}.hero{min-height:185px}.hero-copy{padding:18px 0 20px 16px;width:56%}.hero-copy h1{font-size:36px}.hero-copy p{margin:6px 0 10px;max-width:14em;font-size:11px}.hero-copy time{font-size:10px}.hero-copy .action{padding:5px 9px}.word{font-size:9px}.word .icon{width:15px}.word .icon,.plates-label{display:none}.door-hint{font-size:14px;bottom:0}.plaque{font-size:10px}.brand small{font-size:8px}.news-card{grid-template-columns:35px minmax(0,1fr)}.news-card h3{font-size:16px}.stamp{min-height:41px}.stamp b{font-size:20px}.card-meta{gap:5px}.nav .action{padding:6px 10px}.feed-count{font-size:10px}}
+@media(max-width:350px){.hero-copy h1{font-size:31px}.porch{transform:scale(.5);right:-38px}.wrap{padding-left:12px;padding-right:12px}.news-card{padding:11px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+.stick{width:62px;height:135px;right:45px;transform:rotate(12deg) scale(1.16)}.globe{height:58px;background:linear-gradient(120deg,#f9ffffc9,#e8ffff42 52%,#a0d3d775)}.house{left:12px;bottom:7px;width:27px;height:26px;background:linear-gradient(90deg,#f4f5f2,#fff 60%);border-color:#859e9f}.house:before{left:-6px;top:-12px;width:36px;height:16px;background:#008cae;clip-path:polygon(50% 0,100% 82%,92% 100%,50% 35%,9% 100%,0 81%)}.house:after{left:8px;width:8px;height:18px;background:#eaf4ef;border-color:#668f98;border-radius:3px 3px 0 0}.neck{top:51px;height:15px;background:linear-gradient(#fff,#e9f2ec)}.handle{top:63px;height:71px;width:21px;border-radius:5px 5px 10px 10px;background:linear-gradient(90deg,#d2dedd,#fff 45%,#edf4f1)}.handle:after{width:7px;height:16px;left:5px;border-radius:6px 6px 3px 3px;background:#f7fcfa;border-color:#8eaaad}.source-row a:focus-visible{outline-offset:1px}
+@media(max-width:470px){.porch{right:-15px}.stick{right:70px;transform:rotate(9deg) scale(1.12)}}
+.door-letter{position:absolute;z-index:2;left:183px;top:102px;width:56px;height:46px;transform:rotate(-6deg);background:linear-gradient(147deg,transparent 49%,#cfb070 50% 52%,transparent 53%) 0 0/51% 43% no-repeat,linear-gradient(213deg,transparent 49%,#cfb070 50% 52%,transparent 53%) 100% 0/51% 43% no-repeat,#fffbea;border:1.5px solid #b59a60;border-radius:4px;color:#465f5b;box-shadow:1px 4px 2px #725f3836;font-size:10px;font-weight:750;padding:17px 1px 1px}.door-letter:before{position:absolute;content:"♥";font-size:11px;top:4px;left:23px;color:var(--teal)}.door-letter:hover{transform:translateY(-2px) rotate(-3deg)}.news-card:focus{outline:2px solid var(--teal);outline-offset:2px}.porch.has-letter .envelope{visibility:hidden}
+.neighbors{grid-column:1/-1;min-width:0;border:1px solid #bfd8d1;border-radius:14px;background:#f3f8f1;padding:14px 15px 8px;scroll-margin-top:12px}
+.neighbors:target{border-color:#8ab5ad}.neighbors:focus-visible{outline:2px solid #38898a;outline-offset:2px}
+.neighbors .section-title{color:#195960}.neighbor-status{margin:4px 0 9px;color:#547271;font-size:11px;line-height:1.55}
+.neighbor-toolbar,.neighbor-bottom{display:grid;gap:6px}.neighbor-pages{display:flex;align-items:center;justify-content:space-between}.neighbor-toolbar{padding:2px 0 8px;border-bottom:1px solid var(--rule)}
+.neighbor-tabs{display:inline-flex;align-items:center;justify-self:start;max-width:100%;gap:3px;background:#eaf3ec;border-radius:8px;padding:3px}
+.neighbor-tabs button{white-space:nowrap;min-height:27px;padding:3px 8px;border-radius:6px;color:#486265;font-size:11px;font-weight:650}
+.neighbor-tabs button[aria-pressed="true"]{background:var(--card);color:#174c56;box-shadow:0 1px 3px #32655522}
+.neighbor-post{border-bottom:1px solid #dce7df;padding:8px 0}
+.neighbor-post:last-child{border-bottom:0}.neighbor-meta{display:flex;align-items:baseline;flex-wrap:wrap;gap:1px 7px;min-width:0;margin-bottom:2px;color:#56706e;font-size:10px;line-height:1.45}
+.neighbor-origin{overflow:hidden;text-overflow:ellipsis;min-width:0}.neighbor-meta time{flex:none;font-variant-numeric:tabular-nums}
+.neighbor-post h3{font-size:14px;line-height:1.44;font-weight:710;overflow-wrap:anywhere}
+.neighbor-title:hover{text-decoration:underline;text-underline-offset:2px}.neighbor-title .icon{width:12px;height:12px;margin-left:4px;color:var(--teal);vertical-align:baseline}
+.neighbor-source a:hover{text-decoration:underline}.neighbor-empty{font-size:12px;padding:16px 0;color:var(--quiet)}
+.neighbor-bottom{border-top:1px solid var(--rule);padding-top:4px}.neighbor-pages{grid-row:1}
+.neighbor-pages{gap:8px;font-size:12px}.neighbor-pages button{min-height:32px;padding:3px 7px;color:var(--teal);font-weight:650;border-radius:6px}.neighbor-pages button:hover:enabled{background:#e8f2ec}.neighbor-pages button:disabled{cursor:default;color:#879591}.neighbor-pages span{white-space:nowrap;color:var(--quiet);font-variant-numeric:tabular-nums}
+.neighbor-origins{flex:1;min-width:min(175px,100%);max-width:550px}.neighbor-origins summary{line-height:32px;font-size:12px;font-weight:650;color:#3e6664;cursor:pointer;width:fit-content}.neighbor-origins summary:hover{text-decoration:underline;text-underline-offset:2px}
+.neighbor-source{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:5px 0;font-size:11px}
+.neighbor-source a{font-weight:650;overflow-wrap:anywhere}.neighbor-source a .icon{height:10px;width:10px;margin-left:3px}
+.neighbor-source span{font-size:10px;white-space:nowrap;color:#54726b}.neighbor-source span.bad{color:#8d4b35}
+@media(max-width:705px){.nav .community-jump{display:inline-flex;color:var(--teal);align-items:center;min-height:39px}.neighbors{padding:14px 14px 8px}.neighbor-post h3{font-size:15px}.neighbor-source{font-size:12px}.neighbor-source a{padding:3px 0}}
+@media(max-width:350px){.nav{gap:8px}.nav .community-jump{font-size:11px}}
+.neighbor-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.neighbor-refresh{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border:1px solid #bbd4c9;border-radius:15px;font-size:11px;color:#215d64;font-weight:650;background:var(--card)}
+.neighbor-refresh .icon{width:13px;height:13px}.neighbor-refresh[aria-busy=true] .icon{animation:turn 1.1s linear infinite}
+.neighbor-region{display:flex;align-items:center;justify-content:space-between;gap:6px;color:#496569;font-size:11px}
+.neighbor-region select{color:var(--ink);background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:4px 6px;font:inherit;min-height:29px;max-width:125px}
+.neighbor-region select:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.translation-button{color:var(--teal);font-size:11px;font-weight:650;padding:3px 0;min-height:24px;white-space:nowrap}
+.translation-button:hover{background:#eaf4ef}.translation-body{grid-column:1/-1;grid-row:3;padding:6px 8px;margin-top:6px;border-left:2px solid #8ebdaa;background:#eef5ed;color:#2d5354;font-size:13px;overflow-wrap:anywhere}
+.translation-fallback{grid-column:1/-1;grid-row:4;justify-self:start;display:inline-flex;align-items:center;gap:3px;padding:5px 0;color:var(--teal);font-size:11px;text-decoration:underline;text-underline-offset:2px}.translation-fallback .icon{width:12px;height:12px}
+.neighbor-service{font-size:10px;color:#536f6b;margin:6px 0}.neighbor-feedback{font-size:11px;color:#335d60;margin:3px 0 6px}.neighbor-feedback:empty{display:none}
+.offline-guide{margin:0 0 14px;padding:12px 16px;border-radius:12px;background:#eff5e8;border:1px solid #d6e1ce;font-size:12px;color:#435f54}
+.offline-guide strong{font-size:13px;color:#315343}.offline-guide p{margin-top:3px}
+.offline-guide details{margin-top:3px}.offline-guide summary{cursor:pointer;color:#235a58;text-decoration:underline;text-underline-offset:2px}
+.offline-guide a,.offline-community-jump{color:var(--teal);font-weight:650}
+.nav .offline-official-jump{display:inline-flex}.offline-community-jump:hover,.nav .offline-official-jump:hover{background:#eef7ee;text-decoration:none}
+@media(max-width:460px){.neighbor-toolbar{gap:6px}.neighbor-tabs button{padding:3px 8px;font-size:11px}.neighbor-region{gap:4px}.neighbor-post{column-gap:7px}.neighbor-meta{gap:6px;font-size:10px}.neighbor-bottom{gap:4px}.neighbor-origins{min-width:115px}.neighbor-pages{gap:2px;font-size:11px}.neighbor-pages button{padding:3px 5px}}
+</style></head>
+<body>
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol>
+<symbol id="refresh" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></symbol>
+<symbol id="out" viewBox="0 0 24 24"><path d="M13 5h6v6m0-6-9 9m-2-8H5v13h13v-4"/></symbol>
+<symbol id="cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v5m10-5v5M3 11h18m-12 4h2"/></symbol>
+<symbol id="down" viewBox="0 0 24 24"><path d="m8 4 8 8-8 8"/></symbol>
+<symbol id="chat" viewBox="0 0 24 24"><path d="M20 11a7.5 7.5 0 0 1-8 7H9l-5 3 1.4-5A7 7 0 0 1 4 11a8 8 0 0 1 16 0Z"/><path d="M8 10h8m-8 3h5"/></symbol>
+</defs></svg>
+<div class="wrap"><header class="top row"><div class="brand"><i class="home-logo" aria-hidden="true"></i><span>隔壁来信<small>BOYNEXTDOOR</small></span></div><nav class="nav" aria-label="页内导航"><a href="#letters">收件箱</a><a href="#schedule">最近行程</a><a class="community-jump" href="#community">邻里讨论</a><button class="action" id="reload"><svg class="icon refresh-icon" aria-hidden="true"><use href="#refresh"/></svg><span>刷新来信</span></button><a id="online-official" class="action offline-official-jump" target="_blank" rel="noopener noreferrer" hidden>联网取信<svg class="icon" aria-hidden="true"><use href="#out"/></svg></a></nav></header>
+<main><section id="offline-guide" class="offline-guide" aria-label="离线快照使用说明" hidden><strong>离线快照</strong><p>先完整解压，双击解压后第一层的「启动隔壁来信.bat」，并保留启动窗口。浏览器会自动打开联网版。</p><p>启动器已运行时，点「联网取信」或「联网看讨论」即可进入相应栏目并刷新。</p><details><summary>联网入口打不开？</summary><p>重新双击启动器，它会打开这台电脑可用的地址。如果手边只有 HTML，请取得含启动器和快照的完整文件夹。</p></details></section><section class="hero" aria-labelledby="title"><div class="hero-copy"><div class="word"><svg class="icon" aria-hidden="true"><use href="#mail"/></svg>BOYNEXTDOOR</div><h1 id="title">隔壁来信</h1><p>组合动态、成员近况与官方行程。</p><div class="mail-actions"><button id="unread" class="action primary" aria-pressed="false">查看未读 <span class="num" id="unread-count">…</span></button><time id="last-update">正在取信…</time></div></div>
+<div class="porch"><i aria-hidden="true" class="base"></i><i aria-hidden="true" class="wall-line"></i><i aria-hidden="true" class="wall-line two"></i><i aria-hidden="true" class="door-lamp"></i><button class="door-button" id="door" aria-pressed="false" aria-label="打开小门"><span class="room" aria-hidden="true"><i class="envelope"></i></span><span class="door-leaf" aria-hidden="true"><i class="door-glass"></i><i class="door-number">BND</i><i class="mail-slot"></i><i class="knob"></i><i class="panel"></i><i class="hinge"></i><i class="hinge lower"></i></span></button><i class="step" aria-hidden="true"></i><span class="door-hint" id="door-hint" aria-hidden="true">轻敲开门</span>
+<button id="door-letter" class="door-letter" aria-label="拆一封来信" hidden>拆一封</button><div class="stick" role="img" aria-label="透明罩中藏着小屋的应援棒插画"><i class="globe"><i class="house"></i></i><i class="neck"></i><i class="handle"></i></div><i aria-hidden="true" class="star a">✦</i><i aria-hidden="true" class="star b">✧</i><i aria-hidden="true" class="star c">✦</i></div></section>
+<section class="members" aria-label="按成员筛选"><div class="plate-wrap" id="plates" role="group" aria-label="成员门牌"><span class="plates-label" aria-hidden="true">成员门牌</span></div></section>
+<div class="layout"><section id="letters" aria-labelledby="letter-title"><div class="feed-head"><div class="section-title"><svg class="icon" aria-hidden="true"><use href="#mail"/></svg><h2 id="letter-title">最新来信</h2></div><span class="feed-count" id="count"></span></div><p id="note" class="status-note" role="status"></p><p id="storage-note" class="status-note" role="status"></p><div class="list" id="news"><p class="empty">正在读取来信…</p></div><button class="more" id="more" hidden>查看更多来信</button></section>
+<aside class="aside"><section class="event-card" id="schedule"><div class="event-top"><div class="section-title"><svg class="icon" aria-hidden="true"><use href="#cal"/></svg><h2>最近官宣行程</h2></div><span id="event-badge" class="upcoming-badge" hidden></span></div><div id="event" class="event-body"><p class="quiet">正在查看行程…</p></div></section>
+<details class="sources"><summary>来信来源<svg class="icon" aria-hidden="true"><use href="#down"/></svg></summary><div id="sources"><p class="quiet">正在检查来源…</p></div></details>
+<section id="community" class="neighbors" aria-labelledby="community-title" tabindex="-1">
+<div class="neighbor-head"><div class="section-title"><svg class="icon" aria-hidden="true"><use href="#chat"/></svg><h2 id="community-title">邻里讨论</h2></div>
+<button type="button" id="community-refresh" class="neighbor-refresh"><svg class="icon" aria-hidden="true"><use href="#refresh"/></svg><span>更新讨论</span></button><a id="online-community" class="neighbor-refresh offline-community-jump" target="_blank" rel="noopener noreferrer" hidden>联网看讨论<svg class="icon" aria-hidden="true"><use href="#out"/></svg></a></div>
+<p id="community-status" class="neighbor-status" role="status">正在查看社区消息…</p>
+<p id="community-feedback" class="neighbor-feedback" role="status"></p>
+<div class="neighbor-toolbar"><div class="neighbor-tabs" role="group" aria-label="邻里消息类型"><button data-type="fan" aria-pressed="true">粉丝讨论</button><button data-type="media" aria-pressed="false">媒体报道</button><button data-type="all" aria-pressed="false">全部</button></div>
+<label class="neighbor-region" title="按来源站点或社区分类">来源地区<select id="community-region"><option value="">全部地区</option></select></label></div>
+<div id="community-news"></div>
+<p class="neighbor-service" id="community-translation-note" hidden>翻译优先使用本机。缺少本机译文或可用语言包时，会将所点标题发给翻译服务。</p>
+<div class="neighbor-bottom"><details class="neighbor-origins" id="community-origins"><summary>讨论与媒体来源</summary><div id="community-sources"><div class="neighbor-source"><a href="https://www.reddit.com/r/BOYNEXTDOOR_/" rel="noopener noreferrer" target="_blank">r/BOYNEXTDOOR_ ↗</a><span>直达社区</span></div></div></details>
+<nav class="neighbor-pages" id="community-pagination" aria-label="讨论翻页" hidden><button id="community-prev" aria-controls="community-news">上一页</button><span id="community-page" aria-live="polite"></span><button id="community-next" aria-controls="community-news">下一页</button></nav></div>
+</section></aside></div></main><footer class="foot"><span>隔壁来信 · 非官方歌迷资讯页</span><span>时间均为北京时间</span></footer></div>
+<script src="snapshot.js"></script>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const memberNames=['SUNGHO','RIWOO','JAEHYUN','TAESAN','LEEHAN','WOONHAK'];
+const zone='Asia/Shanghai', dateFields={timeZone:zone};
+const dayKey=new Intl.DateTimeFormat('sv-SE',{...dateFields,year:'numeric',month:'2-digit',day:'2-digit'});
+const withTime=new Intl.DateTimeFormat('zh-CN',{...dateFields,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false});
+const clock=new Intl.DateTimeFormat('zh-CN',{...dateFields,hour:'2-digit',minute:'2-digit',hour12:false});
+function node(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n}
+function icon(name){const n=document.createElementNS('http://www.w3.org/2000/svg','svg');const use=document.createElementNS(n.namespaceURI,'use');n.setAttribute('class','icon');n.setAttribute('aria-hidden','true');use.setAttribute('href','#'+name);n.append(use);return n}
+function dateValue(raw){if(!raw)return null;const value=String(raw);const dayOnly=/^\d{4}-\d{2}-\d{2}$/.test(value);const date=new Date(dayOnly?value+'T12:00:00+08:00':value);return Number.isNaN(date.getTime())?null:{date,dayOnly}}
+function format(raw){const v=dateValue(raw);return v?(v.dayOnly?dayKey.format(v.date):withTime.format(v.date)):'时间待确认'}
+function safeLink(title,url,cls){try{const u=new URL(url);if(!['https:','http:'].includes(u.protocol))throw Error();const a=node('a',cls,title);a.href=u.href;a.rel='noopener noreferrer';a.target='_blank';return a}catch{return node('span',cls,title)}}
+function loadRead(){try{const old=JSON.parse(localStorage.getItem('bnd-mail.read')||'[]');return new Set(Array.isArray(old)?old:[])}catch{return new Set()}}
+const localFile=location.protocol==='file:';
+const read=loadRead();let items=[],events=[],sources=[],current='',onlyUnread=false,limit=3,lastData='',priorIds=null,added=new Set(),ready=false,working=false,manual=false,timer,wasError=false;
+const communityFallback={name:'r/BOYNEXTDOOR_',url:'https://www.reddit.com/r/BOYNEXTDOOR_/',mode:'link',ok:null,region:'国际'};
+const communityTabs=document.querySelectorAll('.neighbor-tabs button');
+const communityPageSize=3;
+let communityItems=[],communitySources=[],communityUpdated='',communityFilter='',communityPage=1;
+let communityContentKey='',communitySourcesKey='',communityLoading=true,communityOffline=localFile;
+let communityRegion='',communityRegionKey='',communityManual=false,communityProblem='',communityWarning='',communityRevision=0;
+const translationState=new Map();
+const languageNames=new Intl.DisplayNames('zh-CN',{type:'language'});
+const getCommunitySource=item=>communitySources.find(s=>s.name===item.source);
+function sourceRegion(item,source=getCommunitySource(item)){
+ const region=String(item.region||source?.region||'').trim();
+ if(region)return ({JP:'日本',KR:'韩国',CN:'中国',global:'国际'})[region]||region;
+ const name=item.source||item.name||'';
+ if(/KSD|韩星网|微博|哔哩哔哩/.test(name))return '中文圈';
+ if(/Mastodon|Reddit|K-Pop Source/i.test(name))return '国际';
+ return '';
+}
+function titleLanguage(item){
+ const lang=String(item.language||item.lang||'').toLowerCase();
+ if(lang&&lang!=='und')return lang;
+ const title=item.title||'';
+ if(/[\u3041-\u30ff]/u.test(title))return 'ja';
+ if(/[\uac00-\ud7af\u1100-\u11ff]/u.test(title))return 'ko';
+ if(item.title_zh?.trim()===title.trim()&&/\p{Script=Han}/u.test(title))return 'zh';
+ const declared=String(getCommunitySource(item)?.language||'').toLowerCase();
+ return declared&&declared!=='und'?declared:'und';
+}
+function languageLabel(code){
+ if(!code||code==='und')return '';
+ try{return languageNames.of(code)||''}catch{return ''}
+}
+function needsTranslation(item){return !!item.title?.trim()&&!/^zh(?:-|$)|^cmn(?:-|$)|^yue(?:-|$)/i.test(titleLanguage(item))}
+function existingTranslation(item){const value=(item.title_zh||'').trim();return value&&value!==item.title?.trim()?value:''}
+async function onDeviceTranslation(item){
+ const api=window.Translator,lang=titleLanguage(item);
+ if(!api?.availability||!api?.create||lang==='und')return '';
+ let translator;
+ try{
+  const pair={sourceLanguage:lang,targetLanguage:'zh'};
+  if(await api.availability(pair)!=='available')return '';
+  translator=await api.create(pair);
+  const translated=await translator.translate(item.title);
+  return typeof translated==='string'?translated.trim():'';
+ }catch{return ''}
+ finally{translator?.destroy?.()}
+}
+function translationControl(item){
+ const box=node('div','neighbor-translation'),button=node('button','translation-button'),body=node('p','translation-body');
+ const web=new URL('https://translate.google.com/');web.search=new URLSearchParams({sl:'auto',tl:'zh-CN',text:item.title,op:'translate'}).toString();
+ const fallback=safeLink('打开网页版翻译',web.href,'translation-fallback');fallback.append(icon('out'));fallback.hidden=true;
+ fallback.title='在 Google 翻译中打开这条标题';
+ const key=JSON.stringify([item.id||item.url,item.title]);
+ let state=translationState.get(key);
+ if(!state){state={open:false,busy:false,text:'',error:''};translationState.set(key,state)}
+ const local=existingTranslation(item);
+ function paint(){
+  button.textContent=state.busy?'翻译中…':state.open?(state.error&&!localFile?'重试翻译':'收起译文'):'翻译';
+  button.disabled=state.busy;button.setAttribute('aria-expanded',String(state.open));
+  button.title=local||state.text?'显示或收起中文标题':localFile?'使用浏览器已就绪的本机翻译':'优先在本机翻译，不可用时将此标题发送给翻译服务';
+  body.hidden=!state.open;body.textContent=state.busy?'正在翻译标题…':state.error||state.text||local;
+  body.title=state.error?'':state.provider||'已保存的中文标题';
+  fallback.hidden=!state.open||!state.error;
+ }
+ state.render=paint;body.setAttribute('role','status');
+ button.onclick=async()=>{
+  if(state.busy)return;
+  if(state.open&&(!state.error||localFile)){state.open=false;paint();return}
+  state.open=true;state.error='';
+  if(local||state.text){paint();return}
+  state.busy=true;paint();
+  try{
+   state.text=await onDeviceTranslation(item);
+   if(state.text){state.provider='浏览器本机翻译';return}
+   if(localFile||!item.id){
+    state.error=localFile?'此快照暂无译文，本机翻译也暂不可用。双击解压后第一层的「启动隔壁来信.bat」可联网翻译。':'此条消息缺少翻译所需的编号。';
+    return;
+   }
+   const response=await fetch('/api/community/translate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:item.id}),signal:AbortSignal.timeout(30000)});
+   const result=await response.json().catch(()=>({}));
+   if(!response.ok||result.error||!result.translation?.trim())throw Error(result.error||'暂时未取得译文，请重试。');
+   state.text=result.translation.trim();state.provider=String(result.provider||'在线翻译');
+  }catch(error){state.error=error.name==='TimeoutError'?'翻译超时，请重试。':error.message==='Failed to fetch'?'无法连接翻译服务，请重试。':error.message||'翻译失败，请重试。'}
+  finally{state.busy=false;state.render()}
+ };
+ paint();box.append(button,body,fallback);return box;
+}
+function communityType(item){
+ const label=String(item.kind||'');
+ if(label==='媒体报道'||label==='media')return 'media';
+ if(label.startsWith('官方')||label==='official')return 'official';
+ return 'fan';
+}
+function neighborPost(item,showKind){
+ const post=node('article','neighbor-post'),type=communityType(item);
+ const category={fan:'粉丝讨论',media:'媒体报道',official:'官方发布'}[type];
+ const meta=node('div','neighbor-meta'),date=dateValue(item.published_at),time=node('time');
+ if(date){
+  time.dateTime=item.published_at;time.title=format(item.published_at);
+  time.textContent=dayKey.format(date.date)+(date.dayOnly?'':' '+clock.format(date.date));
+ }else time.textContent='时间待确认';
+ const lang=titleLanguage(item),where=sourceRegion(item),language=languageLabel(lang);
+ const source=(item.source||'').replace(/\s*·\s*BOYNEXTDOOR$/i,'');
+ const origin=node('span','neighbor-origin',[showKind?category:'',source,where,language].filter(Boolean).join(' · '));
+ origin.title=[item.source,where?'来源地区：'+where:'',language?'标题语种：'+language:''].filter(Boolean).join(' · ');
+ meta.append(origin,time);
+ const title=node('h3'),link=safeLink(item.title||'查看原帖',item.url,'neighbor-title');
+ if(lang!=='und')link.lang=lang;
+ link.append(icon('out'));title.append(link);post.append(meta,title);
+ if(needsTranslation(item))post.append(translationControl(item));return post;
+}
+function neighborSource(source){
+ const where=sourceRegion(source,source);
+ const row=node('div','neighbor-source'),link=safeLink(source.name+(where?' · '+where:''),source.url);
+ if(link.tagName==='A')link.append(icon('out'));
+ const direct=source.mode==='link';
+ const cached=communityItems.some(item=>item.source===source.name);
+ const status=direct?'直达原站':source.ok===false?(cached?'更新失败 · 有缓存':'暂不可用'):source.error?'部分更新':source.ok===true?'已更新':'待检查';
+ const value=node('span',!direct&&(source.ok===false||source.error)?'bad':'',status);
+ value.title=[source.updated_at?'上次成功 '+format(source.updated_at):'',source.error].filter(Boolean).join(' · ');
+ row.append(link,value);return row;
+}
+function inCommunityRegion(item){return !communityRegion||sourceRegion(item)===communityRegion}
+function paintRegions(){
+ const regions=Array.from(new Set([...communityItems,...communitySources].map(item=>sourceRegion(item)).filter(Boolean))).sort((a,b)=>a.localeCompare(b,'zh-CN'));
+ if(communityRegion&&!regions.includes(communityRegion))regions.push(communityRegion);
+ const key=JSON.stringify(regions);if(key===communityRegionKey)return;communityRegionKey=key;
+ const select=$('community-region'),all=node('option','','全部地区');all.value='';
+ select.replaceChildren(all,...regions.map(region=>{const opt=node('option','',region);opt.value=region;return opt}));select.value=communityRegion;
+}
+function selectedCommunityType(){
+ if(communityFilter)return communityFilter;
+ const rows=communityItems.filter(inCommunityRegion);
+ return rows.some(i=>communityType(i)==='fan')||!rows.length?'fan':'all';
+}
+function paintCommunityPosts(filterChanged=false){
+ const type=selectedCommunityType();
+ for(const tab of communityTabs)tab.setAttribute('aria-pressed',String(tab.dataset.type===type));
+ const rows=communityItems.filter(i=>inCommunityRegion(i)&&(type==='all'||communityType(i)===type));
+ const list=$('community-news'),pages=Math.ceil(rows.length/communityPageSize),requestedPage=communityPage;
+ communityPage=Math.min(Math.max(1,communityPage),Math.max(1,pages));
+ const offset=(communityPage-1)*communityPageSize,visible=rows.slice(offset,offset+communityPageSize);
+ const empty=communityLoading?'正在收取社区消息…':communityRegion?'当前地区与分类下暂无消息，可切换至全部地区或访问下方来源。':type==='media'?'暂未收录媒体报道，可在下方查看来源。':type==='fan'?'暂未收录粉丝帖子，可从下方直接逛社区。':'暂未收录消息，可从下方进入原站。';
+ const key=JSON.stringify([visible,visible.map(i=>[titleLanguage(i),sourceRegion(i)]),rows.length,communityPage,type,visible.length?'':empty]);
+ const focusInPosts=list.contains(document.activeElement);
+ if(key===communityContentKey||(!filterChanged&&requestedPage===communityPage&&focusInPosts))return;
+ communityContentKey=key;
+ list.replaceChildren(...(visible.length?visible.map(item=>neighborPost(item,type==='all')):[node('p','neighbor-empty',empty)]));
+ $('community-translation-note').hidden=localFile||!visible.some(i=>needsTranslation(i)&&!existingTranslation(i));
+ $('community-pagination').hidden=!pages;
+ $('community-prev').disabled=communityPage<=1;$('community-next').disabled=communityPage>=pages;
+ $('community-page').textContent=pages?communityPage+' / '+pages+' 页':'';
+ if(focusInPosts&&requestedPage!==communityPage)(list.querySelector('.neighbor-title')||$('community')).focus({preventScroll:true});
+}
+function paintCommunitySources(){
+ const all=communitySources.length?communitySources:[communityFallback],host=$('community-sources');
+ const key=JSON.stringify(all);
+ if(key===communitySourcesKey||host.contains(document.activeElement))return;
+ communitySourcesKey=key;host.replaceChildren(...all.map(neighborSource));
+}
+function updateCommunityStatus(){
+ const messages=[];
+ if(communityLoading)messages.push(communityItems.length?'正在检查更新，先看已收录内容':'正在检查来源');
+ else if(communityOffline)messages.push(communityItems.length?'当前显示本地缓存':'尚无本地讨论缓存');
+ if(communityUpdated)messages.push('上次检查成功 '+format(communityUpdated));
+ const unavailable=communitySources.filter(s=>s.mode!=='link'&&(s.ok===false||s.error));
+ if(unavailable.length)messages.push(unavailable.length+' 个来源暂未完整更新');
+ if(communityProblem)messages.push(communityProblem);
+ if(communityWarning)messages.push(communityWarning.replace(/[。.]$/,''));
+ if(!messages.length)messages.push('可从下方进入消息原站');
+ const status=messages.join(' · ')+'。';if($('community-status').textContent!==status)$('community-status').textContent=status;
+ const button=$('community-refresh'),busyNow=!localFile&&(communityManual||communityLoading);
+ button.disabled=busyNow;button.setAttribute('aria-busy',String(busyNow));button.querySelector('span').textContent=busyNow?'检查中':'更新讨论';
+}
+function showCommunity(community,loading,offline){
+ const nextItems=Array.isArray(community?.items)?community.items:[];
+ const nextSources=Array.isArray(community?.sources)?community.sources:[];
+ const cachedAfterFailure=!!community?.error&&!nextItems.length&&communityItems.length>0;
+ if(!cachedAfterFailure)communityItems=nextItems;
+ if(!cachedAfterFailure||nextSources.length)communitySources=nextSources;
+ communityUpdated=community?.updated_at||(cachedAfterFailure?communityUpdated:'');
+ communityLoading=!offline&&(community?.refreshing??loading);communityOffline=offline;communityProblem=community?.error||'';communityWarning=community?.storage_warning||'';
+ paintRegions();paintCommunityPosts();paintCommunitySources();updateCommunityStatus();
+}
+$('community-region').onchange=e=>{communityRegion=e.target.value;communityPage=1;paintCommunityPosts(true)};
+async function refreshCommunity(){
+ const feedback=$('community-feedback');
+ if(localFile)return;
+ if(communityManual)return;
+ communityManual=true;communityRevision++;communityLoading=true;communityProblem='';feedback.textContent='正在检查社区和媒体来源…';updateCommunityStatus();
+ try{
+  let path='/api/community/refresh',method='POST';
+  for(;;){
+   const response=await fetch(path,{method,cache:'no-store',signal:AbortSignal.timeout(25000)});
+   if(!response.ok)throw Error();
+   const result=await response.json();
+   if(!Array.isArray(result.items)||!Array.isArray(result.sources))throw Error();
+   showCommunity(result,!!result.refreshing,false);
+   if(!result.refreshing)break;
+   await new Promise(resolve=>setTimeout(resolve,1300));path='/api/community/news';method='GET';
+  }
+  const checked=communitySources.filter(s=>s.mode!=='link');
+  const failures=checked.filter(s=>s.ok===false||s.error).length;
+  if(communityProblem)feedback.textContent='社区更新未完成。';
+  else if(!checked.length)feedback.textContent='当前仅有原站入口，暂无可检查的订阅源。';
+  else if(!checked.some(s=>s.ok===true))feedback.textContent=communityItems.length?'本次未取得新数据，仍可阅读已有缓存。':'来源暂时未返回可用内容，可从下方进入原站。';
+  else feedback.textContent=failures?'检查完成，部分来源暂时不可用。':'已检查最新社区消息。';
+ }catch{feedback.textContent='未能确认社区更新结果，请稍后重试。';communityOffline=true}
+ finally{communityManual=false;communityRevision++;communityLoading=false;paintCommunityPosts();updateCommunityStatus()}
+}
+$('community-refresh').onclick=refreshCommunity;
+for(const tab of communityTabs){
+ tab.onclick=()=>{communityFilter=tab.dataset.type;communityPage=1;paintCommunityPosts(true)};
+}
+$('community-prev').onclick=()=>{communityPage--;paintCommunityPosts(true)};
+$('community-next').onclick=()=>{communityPage++;paintCommunityPosts(true)};
+$('community-news').addEventListener('focusout',()=>setTimeout(paintCommunityPosts,0));
+$('community-sources').addEventListener('focusout',()=>setTimeout(paintCommunitySources,0));
+function members(i){return Array.isArray(i.members)?i.members.map(n=>String(n).toUpperCase()).filter(n=>memberNames.includes(n)):[]}
+function saveRead(){try{localStorage.setItem('bnd-mail.read',JSON.stringify([...read].slice(-4000)))}catch{}}
+function paintUnread(){const unread=items.filter(i=>!read.has(i.id)).length;$('unread-count').textContent=ready?String(unread):'…';$('unread').setAttribute('aria-pressed',String(onlyUnread));$('unread').firstChild.textContent=onlyUnread?'显示全部 ':'查看未读 ';document.body.classList.toggle('waiting',ready&&unread>0)}
+function card(item){
+ const n=node('article','news-card'+(added.has(item.id)?' new-in':'')),date=dateValue(item.published_at);
+ n.dataset.id=item.id;n.tabIndex=-1;
+ const stamp=node('div','stamp');stamp.setAttribute('aria-hidden','true');
+ if(date){const parts=dayKey.format(date.date).split('-');stamp.append(node('span','',String(Number(parts[1]))+'月'),node('b','',parts[2]))}
+ else{stamp.append(icon('mail'))}
+ const copy=node('div'),meta=node('div','card-meta'),t=node('time','',format(item.published_at));
+ if(date)t.dateTime=item.published_at;
+ meta.append(node('span','kind',item.kind||'来源消息'),node('span','',item.source),t);
+ if(!read.has(item.id))meta.append(node('span','fresh','未读'));
+ const h=node('h3'),link=safeLink(item.title_zh||item.title||'查看原文',item.url);if(item.title_zh&&item.title)link.title=item.title;h.append(link);copy.append(meta,h);
+ if(item.summary_zh&&item.summary_zh!==item.title_zh)copy.append(node('p','summary',item.summary_zh));
+ const bottom=node('div','card-bottom');for(const m of members(item))bottom.append(node('span','member-tag',m));
+ const origin=safeLink('查看原文',item.url,'external');origin.append(icon('out'));bottom.append(origin);copy.append(bottom);n.append(stamp,copy);
+ n.addEventListener('click',e=>{if(!e.target.closest('a')||read.has(item.id))return;read.add(item.id);saveRead();n.querySelector('.fresh')?.remove();paintUnread();if(onlyUnread)setTimeout(list,0)});
+ return n;
+}
+function list(){
+ const rows=items.filter(i=>(!current||members(i).includes(current))&&(!onlyUnread||!read.has(i.id)));
+ $('letter-title').textContent=onlyUnread?'未读来信':current?current+' 的来信':'最新来信';$('count').textContent=rows.length?'显示 '+Math.min(limit,rows.length)+' / '+rows.length+' 封':'';
+ $('news').replaceChildren(...rows.slice(0,limit).map(card));$('more').hidden=rows.length<=limit;
+ if(!rows.length){let msg='还没有收到来信。';if(current&&onlyUnread)msg='这个成员暂时没有未读来信。';else if(current)msg='当前来信中暂无明确提及 '+current+' 的消息。';else if(onlyUnread&&items.length)msg='所有来信都读完了。';else if(working)msg='正在检查消息来源…';else if(sources.some(s=>s.ok===false))msg='暂未取得来信，请查看来源状态后再刷新。';$('news').append(node('p','empty',msg))}
+}
+function markPlates(){for(const b of $('plates').querySelectorAll('button'))b.setAttribute('aria-pressed',String(b.dataset.name===current))}
+for(const name of ['',...memberNames]){const b=node('button','plaque',name||'全员');b.dataset.name=name;b.onclick=()=>{current=name;limit=3;added.clear();markPlates();list()};$('plates').append(b)}
+markPlates();
+function eventCandidate(e,now,today){
+ const start=dateValue(e.start_at),end=dateValue(e.end_at);if(!start)return null;
+ const first=dayKey.format(start.date);const effective=end||start;
+ const past=effective.dayOnly?dayKey.format(effective.date)<today:effective.date<now;
+ if(past)return null;
+ return {e,start,end,ongoing:(!!end&&((start.dayOnly&&first<=today)||(!start.dayOnly&&start.date<=now))),today:first===today,sort:first+(start.dayOnly?'':clock.format(start.date))};
+}
+function renderEvent(){
+ const now=new Date(),today=dayKey.format(now),candidates=events.map(e=>eventCandidate(e,now,today)).filter(Boolean).sort((a,b)=>Number(b.ongoing)-Number(a.ongoing)||a.sort.localeCompare(b.sort));const c=candidates[0],body=$('event');body.replaceChildren();$('event-badge').hidden=!c;
+ if(!c){body.append(node('p','quiet',working?'正在查看官方日程…':'暂未收到含明确日期的下一项官方行程。'));return}
+ $('event-badge').textContent=c.ongoing?'进行中':c.today?'今天':'即将到来';
+ let time=format(c.e.start_at);if(c.end)time+=' 至 '+format(c.e.end_at);
+ body.append(node('time','event-date',time),safeLink(c.e.title_zh||c.e.title,c.e.url,'event-title'),node('p','event-src',c.e.source||'官方发布'));
+}
+function renderSources(){const rows=sources.map(s=>{const r=node('div','source-row'),info=node('span','source-state'),state=s.ok===true?(s.error?'部分更新':'已更新'):s.ok===false?'暂不可用':'待更新';r.append(safeLink(s.name,s.url));const label=node('span',s.ok===false||s.error?'bad':'',state);if(s.error)label.title=s.error;info.append(label);if(s.updated_at)info.append(node('br'),node('time','','上次成功 '+format(s.updated_at)));r.append(info);return r});$('sources').replaceChildren(...(rows.length?rows:[node('p','quiet','暂无来源状态。')]))}
+function busy(yes){working=yes;document.body.classList.toggle('busy',yes);$('reload').disabled=yes;$('reload').querySelector('span').textContent=yes?'正在取信':'刷新来信'}
+function show(data,withCommunity=true){
+ if(!Array.isArray(data.items)||!Array.isArray(data.sources)||!Array.isArray(data.events))throw Error('不完整的数据');
+ ready=true;busy(!!data.refreshing);items=data.items;sources=data.sources;events=data.events;
+ const warning=data.storage_warning||'';
+ if($('storage-note').textContent!==warning)$('storage-note').textContent=warning;
+ const nextIds=new Set(items.map(i=>i.id));added=priorIds?new Set([...nextIds].filter(i=>!priorIds.has(i))):new Set();priorIds=nextIds;
+ paintUnread();updateDoorLetter();$('last-update').textContent=data.updated_at?'上次更新 '+format(data.updated_at):(working?'正在取信…':'等待首次更新');
+ const fingerprint=JSON.stringify([items,sources,working&&!items.length]);
+ if(fingerprint!==lastData){lastData=fingerprint;list();renderSources()}
+ renderEvent();if(withCommunity&&!communityManual)showCommunity(data.community,working,localFile);
+}
+let queuedOfficialRefresh=false;
+async function sync(refresh=false){
+ if(sync.pending){
+  if(refresh&&!sync.posting){
+   queuedOfficialRefresh=true;busy(true);$('note').textContent='已收到刷新请求，当前检查结束后立即取信。';
+  }
+  return;
+ }
+ sync.pending=true;sync.posting=refresh;clearTimeout(timer);
+ const communityAtStart=communityRevision;
+ if(refresh){manual=true;busy(true);$('note').textContent='正在检查来源…'}
+ let retry=false;
+ try{const response=await fetch(refresh?'/api/refresh':'/api/news',{method:refresh?'POST':'GET',cache:'no-store',signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error();const data=await response.json();show(data,communityAtStart===communityRevision);if(data.error){$('note').textContent=data.error;manual=false;wasError=true}else{if(!working&&manual){const failures=sources.filter(s=>s.ok===false||s.error).length;$('note').textContent=failures?'已检查，'+failures+' 个来源未能完整更新。':'已检查最新来信。';manual=false}else if(wasError&&!manual){$('note').textContent=''}wasError=false}}
+ catch{manual=false;wasError=true;retry=true;busy(false);$('note').textContent='暂时连不上服务器，请稍后刷新。';if(!ready){$('last-update').textContent='尚未连接';$('news').replaceChildren(node('p','empty','未能读取来信。'));$('event').replaceChildren(node('p','quiet','尚未取得行程。'));$('sources').replaceChildren(node('p','quiet','尚未取得来源状态。'))}if(!communityManual&&communityAtStart===communityRevision){if(!ready)showCommunity(window.NEXTDOOR_SNAPSHOT?.community,false,true);else{communityLoading=false;communityOffline=true;paintCommunityPosts();updateCommunityStatus()}}}
+ finally{
+  sync.pending=false;sync.posting=false;
+  if(queuedOfficialRefresh){queuedOfficialRefresh=false;sync(true)}
+  else timer=setTimeout(()=>sync(),working&&!retry?1300:(document.hidden?60000:15000));
+ }
+}
+$('unread').onclick=()=>{onlyUnread=!onlyUnread;limit=3;added.clear();paintUnread();list();$('letters').scrollIntoView({block:'start'})};$('more').onclick=()=>{limit+=6;added.clear();list()};$('reload').onclick=()=>{if(!localFile)sync(true)};
+function updateDoorLetter(){
+ const target=items.find(i=>!read.has(i.id))||items[0];
+ const visible=$('door').getAttribute('aria-pressed')==='true'&&!!target;
+ $('door-letter').hidden=!visible;$('door').parentElement.classList.toggle('has-letter',visible);
+ if(visible)$('door-letter').title=target.title_zh||target.title||'拆一封来信';
+}
+$('door').onclick=()=>{const open=$('door').classList.toggle('open');$('door').setAttribute('aria-pressed',String(open));$('door').setAttribute('aria-label',open?'关上小门':'打开小门');$('door-hint').textContent=open?'轻敲关门':'轻敲开门';updateDoorLetter()};
+$('door-letter').onclick=()=>{
+ const index=items.findIndex(i=>!read.has(i.id)),target=items[Math.max(0,index)];if(!target)return;
+ current='';onlyUnread=false;limit=Math.max(3,index+1);added.clear();read.add(target.id);saveRead();
+ markPlates();paintUnread();updateDoorLetter();list();const chosen=Array.from($('news').children).find(n=>n.dataset.id===target.id);
+ if(chosen){chosen.focus({preventScroll:true});chosen.scrollIntoView({block:'center'})}
+};
+function offlineControls(){
+ const remembered=window.NEXTDOOR_SNAPSHOT?.online_port;
+ const port=Number.isInteger(remembered)&&remembered>=18771&&remembered<=18778?remembered:18771;
+ const address='http://127.0.0.1:'+port+'/';
+ $('offline-guide').hidden=false;$('reload').hidden=true;$('community-refresh').hidden=true;
+ for(const [id,route] of [['online-official','?refresh=official#letters'],['online-community','?refresh=community#community']]){
+  const link=$(id);link.href=address+route;link.hidden=false;
+  link.title='在新标签页打开已启动的本机联网版';
+ }
+}
+function takeRefreshIntent(){
+ if(location.protocol!=='http:'||!['localhost','127.0.0.1'].includes(location.hostname))return '';
+ const url=new URL(location.href),mode=url.searchParams.get('refresh');
+ if(mode!=='official'&&mode!=='community')return '';
+ url.searchParams.delete('refresh');history.replaceState(history.state,'',url.pathname+url.search+url.hash);
+ return mode;
+}
+if(localFile){
+ offlineControls();const data=window.NEXTDOOR_SNAPSHOT;
+ if(data&&Array.isArray(data.items)){show({...data,refreshing:false})}
+ else{busy(false);$('last-update').textContent='尚无本地快照';$('news').replaceChildren(node('p','empty','尚未读取到快照。请双击解压后第一层的「启动隔壁来信.bat」接收消息。'));$('event').replaceChildren(node('p','quiet','尚未收录行程。'));$('sources').replaceChildren(node('p','quiet','尚未读取来源状态。'));showCommunity(null,false,true)}
+}else{
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!sync.pending&&!communityManual)sync()});
+ const intent=takeRefreshIntent();
+ if(intent==='community'){
+  const saved=window.NEXTDOOR_SNAPSHOT;
+  if(saved&&Array.isArray(saved.items))show({...saved,refreshing:false});
+  refreshCommunity().finally(()=>{
+   if(!sync.pending){clearTimeout(timer);timer=setTimeout(()=>sync(),15000)}
+  });
+ }else{sync(intent==='official')}
+}
+</script></body></html>

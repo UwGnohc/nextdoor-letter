@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: nextdoor-letter
+    runtime: python
+    plan: free
+    region: singapore
+    buildCommand: python -m pip install -r requirements.txt
+    startCommand: waitress-serve --listen=0.0.0.0:$PORT --threads=6 --max-request-body-size=4096 web:application
+    healthCheckPath: /healthz
